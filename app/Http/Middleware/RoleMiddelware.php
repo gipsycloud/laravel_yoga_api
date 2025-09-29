@@ -18,7 +18,7 @@ class RoleMiddelware
     {
         $user = Auth::user();
 
-        if($user && $user()->roleId == $roleId){
+        if($user && $user->roleId == $roleId){
             return $next($request);
         }
 
