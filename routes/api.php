@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\PaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
@@ -16,6 +17,8 @@ Route::prefix('v1/')->group(function () {
         Route::resource('users', UserController::class)->only('store', 'show', 'update', 'index');
         //role route
         Route::get('/roles', [RoleController::class, 'index']);
+        //payment route
+        Route::resource('payments', PaymentController::class);
 
     });
     //Trainer
