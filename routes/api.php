@@ -1,29 +1,43 @@
 <?php
 
 use App\Models\User;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\AuthController;
+use Illuminate\Support\Facades\Route;    
+use App\Http\Controllers\Dashboard\RoleController;
+use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Api\AppointmentController;
 use App\Http\Controllers\Api\TrainerController;
 use App\Http\Controllers\Api\TestimonialController;
-//  Public routes
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout']);
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('appointments', AppointmentController::class);
-});
-Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('/trainers', TrainerController::class);
-});
+//Public route
+Route::post('v1/register', [AuthController::class, 'register']);
+Route::post('v1/login', [AuthController::class, 'login']);
 
+Route::prefix('v1/')->group(function () {
+    //Admin
+    Route::middleware(['auth:sanctum', 'adminMiddleware'])->group(function () {
+        //user route
+        Route::resource('users', UserController::class)->only('store', 'show', 'update', 'index');
+        //role route
+        Route::get('/roles', [RoleController::class, 'index']);
+        //appointment route
+        Route::apiResource('appointments', AppointmentController::class);
+        //trainer route
+        Route::apiResource('/trainers', TrainerController::class);
+        //testimonials route
+        Route::apiResource('/testimonials', TestimonialController::class);
+      
+    });
+  
+    //Trainer
+    Route::middleware(['auth:sanctum', 'trainerMiddleware'])->group(function () {
+        //user route
+        Route::resource('users', UserController::class)->only('show', 'update');
+    });
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('/testimonials', TestimonialController::class);
-});
+    //Student
+    Route::middleware(['auth:sanctum', 'studentMiddleware'])->group(function () {
+        //user route
 
-Route::get('user',function(){
-        return User::all();
+    });
 });
 

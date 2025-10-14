@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,6 +12,13 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             AppointmentSeeder::class,
+        ]);
+
+        \App\Models\User::create([
+            'full_name' => "John Doe",
+            'email' => "johndoe@gmail.com",
+            'password' => Hash::make('John123456'),
+            'role_id' => 1
         ]);
 
         \App\Models\User::factory(10)->create();
