@@ -1,15 +1,14 @@
 <?php
-    
-use App\Http\Controllers\Dashboard\PaymentController;
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
-use App\Models\User;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\UserController;
-use App\Http\Controllers\Api\AppointmentController;
-use App\Http\Controllers\Api\TrainerController;
-use App\Http\Controllers\Api\TestimonialController;
+use App\Http\Controllers\Api\SubscriptionController;
+use App\Http\Controllers\Dashboard\PaymentController;
+use App\Http\Controllers\Dashboard\TrainerController;
+use App\Http\Controllers\Dashboard\AppointmentController;
+use App\Http\Controllers\Dashboard\TestimonialController;
 
 //Public route
 Route::post('v1/register', [AuthController::class, 'register']);
@@ -35,7 +34,7 @@ Route::prefix('v1/')->group(function () {
 
         //testimonials route
         Route::apiResource('/testimonials', TestimonialController::class);
-      
+
         //subscription
         Route::resource('subscriptions', SubscriptionController::class);
     });
@@ -44,7 +43,7 @@ Route::prefix('v1/')->group(function () {
     Route::middleware(['auth:sanctum', 'trainerMiddleware'])->group(function () {
         //user route
         Route::resource('users', UserController::class)->only('show', 'update');
-        
+
     });
 
     //Student
