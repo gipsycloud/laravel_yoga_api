@@ -30,7 +30,7 @@ jobs:
         uses: appleboy/ssh-action@v0.1.8
         with:
           username: root
-          key: ${{ secrets.SSH_KEY }}
+          key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             echo "Deploying to PRODUCTION server..."
             cd /var/www/laravel_yoga_api
