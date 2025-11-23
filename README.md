@@ -14,6 +14,7 @@ It manages **users, roles, lessons, subscriptions, appointments, trainers, and t
 - Trainer profiles & details
 - Testimonials
 - Pivot tables for relationships (lesson_user, subscription_user, lesson_trainer)
+- 
 
 ---
 
