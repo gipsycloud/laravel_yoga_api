@@ -7,6 +7,7 @@ It manages **users, roles, lessons, subscriptions, appointments, trainers, and t
 
 ## 🛠 Features
 
+
 - Role-based user system (Admin, Trainer, Student)
 - Lessons & Lesson Types
 - Subscriptions
